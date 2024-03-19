@@ -1,19 +1,18 @@
 from collections import defaultdict
 
-def input_teams():
+def input_teams_by_pot():
     teams = []
-    print("Please enter 32 teams in the format 'Team Name,Pot,Country':")
-    for _ in range(32):  # Expecting 32 teams
-        while True:
-            try:
-                team_input = input().strip()
-                name, pot, country = team_input.split(',')
-                pot = int(pot)  # Ensure pot is an integer
-                teams.append([name, pot, country])
-                break  # Break the loop if the input format is correct
-            except ValueError:
-                print("Invalid format. Please use 'Team Name,Pot,Country'.")
-    return teams
+    for pot in range(1, 5):  # Four pots
+        print(f"Please enter teams in pot {pot} in the format: 'Team Name,Country'")
+        for _ in range(8):  # Expecting 8 teams per pot
+            while True:
+                try:
+                    team_input = input().strip()
+                    name, country = team_input.split(',')
+                    teams.append([name, pot, country])
+                    break  # Break the loop if the input format is correct
+                except ValueError:
+                    print("Invalid format. Please use 'Team Name,Country'.")
 
 def add_team_to_group(team, groups):
     for i in range(1, 9):  # 8 groups
