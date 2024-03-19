@@ -1,0 +1,39 @@
+Pot 1
+Manchester City (ENG)
+Sevilla (ESP)
+Barcelona (ESP)
+Napoli (ITA)
+Bayern München (GER)
+Paris Saint-Germain (FRA)
+Benfica (POR)
+Feyenoord (NED)
+
+Pot 2
+Real Madrid (ESP)
+Manchester United (ENG)
+Inter (ITA)
+Dortmund (GER)
+Atlético de Madrid (ESP)
+Leipzig (GER)
+Porto (POR)
+Arsenal (ENG)
+
+Pot 3
+Shakhtar Donetsk (UKR)
+Salzburg (AUT)
+Milan (ITA)
+Braga (POR)
+PSV (NED)
+Lazio (ITA)
+Crvena zvezda (SRB)
+Copenhagen (DEN)
+
+Pot 4
+Young Boys (SUI)
+Real Sociedad (ESP)
+Galatasaray (TUR)
+Celtic (SCO)
+Newcastle (ENG)
+Union Berlin (GER)
+Antwerp (BEL)
+Lens (FRA)
