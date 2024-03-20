@@ -68,25 +68,45 @@ def input_teams_by_pot(num_pots, pot_sizes):
                     print("Invalid format. Please use 'Team Name (Country)'.")
     return teams
 
-def add_team_to_group(team, groups):
-    for i in range(1, len(groups) + 1):
-        if not any(t[1] == team[1] or t[2] == team[2] for t in groups[i]):
-            groups[i].append(team)
-            return True
+def add_team_to_group(team_index, teams, groups, group_constraints):
+    if team_index >= len(teams):
+        return True  # All teams have been successfully added
+
+    team = teams[team_index]
+    for group in range(len(groups)):
+        if can_place_team_in_group(team, group, groups, group_constraints):
+            groups[group].append(team)
+            if add_team_to_group(team_index + 1, teams, groups, group_constraints):
+                return True
+            groups[group].remove(team)  # Backtrack
+
     return False
 
+def can_place_team_in_group(team, group, groups, group_constraints):
+    # Check if the group already has a team from the same pot or country
+    for existing_team in groups[group]:
+        if existing_team[1] == team[1] or existing_team[2] == team[2]:
+            return False
+    # Additional constraints can be checked here
+    return True
+
 def sort_teams_into_groups(teams, total_teams):
-    teams.sort(key=lambda x: x[1])
-    groups = defaultdict(list)
-    group_count = total_teams // len(set([team[1] for team in teams]))  # Calculate number of groups
+    num_groups = total_teams // 4  # Assuming 4 teams per group for simplicity
+    groups = [[] for _ in range(num_groups)]
+    group_constraints = defaultdict(lambda: {'pots': set(), 'countries': set()})
 
-    for team in teams:
-        if not add_team_to_group(team, groups):
-            print(f"Failed to add {team[0]} to any group.")
-            break
+    # Prepare group constraints (not used in this simple example, but can be for more complex rules)
+    for group in range(num_groups):
+        group_constraints[group] = {'pots': set(), 'countries': set()}
 
-    for i in range(1, group_count + 1):
-        print(f"Group {i}: {[team[0] for team in groups[i]]}")
+    teams.sort(key=lambda x: x[1])  # Sort teams by pot for backtracking efficiency
+    if not add_team_to_group(0, teams, groups, group_constraints):
+        print("Failed to organize all teams into groups under the given constraints.")
+        return
+
+    # Display the sorted groups
+    for i, group in enumerate(groups, 1):
+        print(f"Group {i}: {[team[0] for team in group]}")
 
 def main():
     competition_name = get_competition_name()
