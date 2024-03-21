@@ -104,9 +104,10 @@ def sort_teams_into_groups(teams, total_teams):
         print("Failed to organize all teams into groups under the given constraints.")
         return
 
-    # Display the sorted groups
-    for i, group in enumerate(groups, 1):
-        print(f"Group {i}: {[team[0] for team in group]}")
+    # Display the sorted groups with letters
+    for i, group in enumerate(groups, start=65):  # ASCII value for 'A' is 65
+        group_name = chr(i)
+        print(f"Group {group_name}: {[team[0] for team in group]}")
 
 def main():
     competition_name = get_competition_name()
