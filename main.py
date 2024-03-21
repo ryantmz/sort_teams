@@ -1,5 +1,6 @@
 from collections import defaultdict
 import re  # Import regular expression module for parsing input
+import random
 
 def get_competition_name():
     competition_name = input("Enter the name of the competition: ").strip()
@@ -72,13 +73,17 @@ def add_team_to_group(team_index, teams, groups, group_constraints):
     if team_index >= len(teams):
         return True  # All teams have been successfully added
 
+    # Shuffle the group indices to randomize group allocation
+    group_indices = list(range(len(groups)))
+    random.shuffle(group_indices)
+
     team = teams[team_index]
-    for group in range(len(groups)):
-        if can_place_team_in_group(team, group, groups, group_constraints):
-            groups[group].append(team)
+    for group_index in group_indices:
+        if can_place_team_in_group(team, group_index, groups, group_constraints):
+            groups[group_index].append(team)
             if add_team_to_group(team_index + 1, teams, groups, group_constraints):
                 return True
-            groups[group].remove(team)  # Backtrack
+            groups[group_index].remove(team)  # Backtrack
 
     return False
 
